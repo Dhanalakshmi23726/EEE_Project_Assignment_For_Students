@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <title>DATAS</title>
+      <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+   </head>
+   <body>
+      <h1>
+         Employee Management System
+      </h1>
+      <br><br>
+
+      <hr/>
+      {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %}
+
+      <h2>Employees List</h2>
+      <table border="2" padding = "5">
+         <thead>
+            <tr>
+               <th>Employee Id</th>
+               <th>Name</th>
+               <th>Age</th>
+               <th>Position</th>
+               <th>Phone number</th>
+               <th>Email</th>
+               <th>Delete</th>
+               <th>Update</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for employee in Employees %}
+               <tr>
+                  <td>{{ employee.employee_id}}</td>
+                  <td>{{ employee.name }}</td>
+                  <td>{{ employee.age }}</td>
+                  <td>{{ employee.position }}</td>
+                  <td>{{ employee.phonenumber }}</td>
+                  <td>{{ employee.email }}</td>
+                  <td><a href="{{url_for('update',employee_id=employee.employee_id)}}" id="update" >Update</a></td>
+                  <td><a href="{{url_for('delete',employee_id=employee.employee_id)}}" id="delete" >Delete</a></td>
+
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      <br><br>
+      <a href="{{ url_for('addEmployee') }}">Add New Employee</a>
+   </body>
+</html>  
